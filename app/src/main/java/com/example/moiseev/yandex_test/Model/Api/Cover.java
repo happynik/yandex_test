@@ -1,5 +1,5 @@
 
-package com.example.moiseev.yandex_test;
+package com.example.moiseev.yandex_test.model.api;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,5 +1,5 @@
 
-package com.example.moiseev.yandex_test;
+package com.example.moiseev.yandex_test.model.api;
 
 import java.util.ArrayList;
 import java.util.List;

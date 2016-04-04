@@ -1,4 +1,4 @@
-package com.example.moiseev.yandex_test;
+package com.example.moiseev.yandex_test.view;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +9,17 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.moiseev.yandex_test.R;
+import com.example.moiseev.yandex_test.model.api.Artist;
+import com.example.moiseev.yandex_test.presenter.ArtistsListPresenter;
+import com.example.moiseev.yandex_test.presenter.IPresenter;
+import com.example.moiseev.yandex_test.view.ArtistsListView;
+
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements ArtistsListView{
+
+    private IPresenter _presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +28,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        _presenter = new ArtistsListPresenter(this);
+        _presenter.OnLoaded();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     @Override
@@ -48,5 +56,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showArtists(List<Artist> data) {
+
+    }
+
+    private void makeToast(String text) {
+        //Snackbar.make(toolbar, text, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError(String error) {
+        makeToast(error);
+    }
+
+    @Override
+    public void showEmptyList() {
+        makeToast(getString(R.string.empty_artist_list));
     }
 }
